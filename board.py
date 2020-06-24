@@ -14,7 +14,11 @@ class Board:
 		        print(val, end =" ")  
 		    print()
 
-p = Board(10,10)
-p.display()      
+	def read(self):
+		with open('demo.txt') as f:
+            grid = f.readlines()
+        for r in grid:
+            self.board.append([c for c in r.strip()])
+ 
 
 
