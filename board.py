@@ -64,6 +64,15 @@ class Board:
                     
         self.board = np.copy(new_board)
 
+def main(filename):
+    x = Board(filename)
+
+    while True:
+        print("BOARD: ")
+        x.display()
+        input()
+        x.step()
+
 '''
 if __name__ == "__main__":
     x = Board('test.txt')
