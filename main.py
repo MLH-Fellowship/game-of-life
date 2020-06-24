@@ -8,7 +8,7 @@ def main(state_file):
     while True:
         life.display()
         life.update()
-        print('')
+        input('')
 
 
 if __name__ == '__main__':
