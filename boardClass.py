@@ -25,13 +25,18 @@ class Board:
                 print(self.board[row][col])
             print('\n')
 
+    def sumNeighbours(self, row, col):
+        # compute 8-neghbor sum using toroidal boundary conditions - x and y wrap around  
+        sum = this.board[(row - 1) % numRows][(col - 1) % numCols] + this.board[(row - 1) % numRows][col] + this.board[(row - 1) % numRows][(col + 1) % numCols] + this.board[row][(col - 1) % numCols] + this.board[row][(col + 1) % numCols] + this.board[(row + 1) % numRows][(col - 1) % numCols] + this.board[(row + 1) % numRows][col] + this.board[(row + 1) % numRows][(col + 1) % numCols]
+        return sum
+
+
     def step(self):
         # iterate through this.board in row major order
         for row in range(self.numRows):
             for col in range(self.numCols):
                 
-                # compute 8-neghbor sum using toroidal boundary conditions - x and y wrap around  
-                state = this.board[(row - 1) % numRows][(col - 1) % numCols] + this.board[(row - 1) % numRows][col] + this.board[(row - 1) % numRows][(col + 1) % numCols] + this.board[row][(col - 1) % numCols] + this.board[row][(col + 1) % numCols] + this.board[(row + 1) % numRows][(col - 1) % numCols] + this.board[(row + 1) % numRows][col] + this.board[(row + 1) % numRows][(col + 1) % numCols]
+                state = sum(self, row, col)
 
                 if self.board[row][col] == 1: # alive
                     # check if it has either 2 or 3 live neighbours
@@ -44,9 +49,3 @@ class Board:
                     if state == 3:
                         col = 1
 
-    def main():
-        while True: 
-            step()
-
-    if __name__ == '__main__'
-        main()
