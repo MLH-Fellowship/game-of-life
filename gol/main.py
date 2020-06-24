@@ -2,7 +2,7 @@ import gol
 import time
 import curses
 
-game = gol.GameOfLife()
+game = gol.GameOfLife('input.txt')
 
 print('Initial Board:')
 print(game.display())

@@ -2,10 +2,13 @@ import numpy as np
 
 
 class GameOfLife:
-    def __init__(self):
+    def __init__(self, fp):
+        """Read and Initialize Board
+        Args: input.txt
+        """
         self.board = []
         self.steps = 0
-        with open('input.txt') as f:
+        with open(fp) as f:
             board = f.readlines()
         for row in board:
             self.board.append([int(c) for c in row.strip()])
@@ -18,6 +21,7 @@ class GameOfLife:
         return np.sum(area) - board[i, j]
 
     def step(self):
+        """Runs one evolution cycle"""
         board = self.board
         self.steps += 1
         nboard = np.zeros((len(board), len(board[0])), dtype=int)
@@ -34,6 +38,11 @@ class GameOfLife:
         return board
 
     def stats(self):
+        """Returns current board stats
+        - No. of evolution steps
+        - No. of alive cells
+        - No. of dead cells
+        """
         alive = sum([sum(row) for row in self.board])
         dead = len(self.board)*len(self.board[0]) - alive
         stats = {
@@ -44,4 +53,5 @@ class GameOfLife:
         return stats
 
     def display(self):
+        """Returns current board"""
         return '\n'.join([''.join([str(c) for c in row]) for row in self.board])  # noqa
