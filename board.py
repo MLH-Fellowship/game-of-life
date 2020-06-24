@@ -17,11 +17,11 @@ class Board:
                 line = ''.join([bit for bit in line if bit in '01'])
                 if not line:
                     continue
-               
+
                 # Keeps board size tidy.
                 num_rows += 1
                 max_length = max([max_length, len(lines)])
-                
+
                 for j, bit in enumerate(line):
                     if bit == '1':
                         self._cells.add((i, j))
