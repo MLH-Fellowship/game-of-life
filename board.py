@@ -45,7 +45,8 @@ class Board:
         return sum(
             (_i, _j) in self._cells
             for _i in range(i - 1, i + 2)
-            for _j in range(j - 1, j + 2))
+            for _j in range(j - 1, j + 2)
+            if (_i, _j) != (i, j))
 
     def _should_live(self, i, j):
         if (i, j) in self._cells:
