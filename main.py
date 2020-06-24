@@ -1,11 +1,12 @@
-import board
+import boardClass
 
 
 def main(filepath):
-    life = board.Board(filepath)
-    while True:
+    life = boardClass.Board(filepath)
+    for i in range(3):
         life.display()
         life.step()
+    
 
 if __name__ == '__main__':
-    main()
+    main("./board.txt")

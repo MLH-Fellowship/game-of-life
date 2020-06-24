@@ -10,42 +10,46 @@ class Board:
             with open(filepath) as fp:
                 lines = fp.readlines()
                 for line in lines:
-                    numRows += 1 
+                    self.numRows += 1 
                     line = line.strip()
                     col = []
                     for c in line:
                         col.append(c)
-                    numCols = col.len()
+                    self.numCols = len(col)
                     self.board.append(col)
 
     # display board's current state
     def display(self):
+        print("\n")
         for row in range(self.numRows):
             for col in range(self.numCols):
-                print(self.board[row][col])
-            print('\n')
+                print(self.board[row][col], end =" ")
+            print("")
 
     def sumNeighbours(self, row, col):
         # compute 8-neghbor sum using toroidal boundary conditions - x and y wrap around  
-        sum = this.board[(row - 1) % numRows][(col - 1) % numCols] + this.board[(row - 1) % numRows][col] + this.board[(row - 1) % numRows][(col + 1) % numCols] + this.board[row][(col - 1) % numCols] + this.board[row][(col + 1) % numCols] + this.board[(row + 1) % numRows][(col - 1) % numCols] + this.board[(row + 1) % numRows][col] + this.board[(row + 1) % numRows][(col + 1) % numCols]
+        sum = int(self.board[(row - 1) % self.numRows][(col - 1) % self.numCols]) + int(self.board[(row - 1) % self.numRows][col]) + int(self.board[(row - 1) % self.numRows][(col + 1) % self.numCols]) + int(self.board[row][(col - 1) % self.numCols]) + int(self.board[row][(col + 1) % self.numCols]) + int(self.board[(row + 1) % self.numRows][(col - 1) % self.numCols]) + int(self.board[(row + 1) % self.numRows][col]) + int(self.board[(row + 1) % self.numRows][(col + 1) % self.numCols])
         return sum
 
 
     def step(self):
-        # iterate through this.board in row major order
+        # iterate through self.board in row major order
         for row in range(self.numRows):
             for col in range(self.numCols):
                 
-                state = sum(self, row, col)
+                state = self.sumNeighbours(row, col)
+                #print(state)
 
                 if self.board[row][col] == 1: # alive
                     # check if it has either 2 or 3 live neighbours
                     if state == 2 | state == 3:
                         pass
-                    else 
-                        col = 0
+                    else:
+                        print("updated alive -> alive using neighbour sum: ", state)
+                        self.board[row][col] = 0
                 else: # dead
                     # check if it has 3 live neighbours
                     if state == 3:
-                        col = 1
+                        print("updated dead -> alive using neighbour sum: ", state)
+                        self.board[row][col] = 1
 
