@@ -20,7 +20,7 @@ class Board:
 
                 # Keeps board size tidy.
                 num_rows += 1
-                max_length = max([max_length, len(lines)])
+                max_length = max([max_length, len(line)])
 
                 for j, bit in enumerate(line):
                     if bit == '1':
