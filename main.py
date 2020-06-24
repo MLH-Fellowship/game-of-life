@@ -5,7 +5,10 @@ import board
 
 def main(state_file):
     life = board.Board(state_file)
-    life.display()
+    while True:
+        life.display()
+        life.update()
+        print('')
 
 
 if __name__ == '__main__':
