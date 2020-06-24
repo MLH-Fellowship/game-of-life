@@ -4,6 +4,7 @@ import numpy as np
 class GameOfLife:
     def __init__(self):
         self.board = []
+        self.steps = 0
         with open('input.txt') as f:
             board = f.readlines()
         for row in board:
@@ -18,6 +19,7 @@ class GameOfLife:
 
     def step(self):
         board = self.board
+        self.steps += 1
         nboard = np.zeros((len(board), len(board[0])), dtype=int)
         for row in range(len(board)):
             for col in range(len(board[0])):
@@ -30,6 +32,16 @@ class GameOfLife:
         board = nboard
         self.board = board
         return board
+
+    def stats(self):
+        alive = sum([sum(row) for row in self.board])
+        dead = len(self.board)*len(self.board[0]) - alive
+        stats = {
+            'steps': self.steps,
+            'alive cells': alive,
+            'dead_cells': dead
+        }
+        return stats
 
     def display(self):
         return '\n'.join([''.join([str(c) for c in row]) for row in self.board])  # noqa
