@@ -19,7 +19,6 @@ class Board:
             self.cols = cols
         else:
             sys.exit("Invalid board initialization")
-        self.change = self.board[:]
 
     @staticmethod
     def getBoardFromFile(fName):
@@ -38,18 +37,12 @@ class Board:
         else:
             sys.exit("Invalid file path")
 
-    def display(self, both=False):
+    def display(self):
         print()
         for line in self.board:
             for elem in line:
                 print(elem, end=" ")
             print()
-        if both:
-            print()
-            for line in self.change:
-                for elem in line:
-                    print(elem, end=" ")
-                print()
 
     def getNeighborCount(self, x, y):
         count = 0
@@ -57,36 +50,32 @@ class Board:
             newX, newY = x + xList[index], y + yList[index]
             if self.inBounds(newX, newY) and self.board[newX][newY]:
                 count += 1
-        if count > 0:
-            print(x, y, count)
         return count
 
     def inBounds(self, x, y):
         return -1 < x < self.rows and -1 < y < self.cols
 
     def step(self):
+        stepped = list(map(list, self.board))
         for x in range(self.rows):
             for y in range(self.cols):
                 count = self.getNeighborCount(x, y)
                 if count == 3:
-                    self.change[x][y] = 1
+                    stepped[x][y] = 1
                 elif count != 2 and self.board[x][y]:
-                    self.change[x][y] = 0
-        self.display(True)
-        if self.board == self.change:
+                    stepped[x][y] = 0
+        if self.board == stepped:
             return False
-        self.board = self.change[:]
+        self.board = stepped
         return True
 
 
 def main():
     fileBoard = Board(0, 0, "board2.txt")
     fileBoard.display()
-    print(fileBoard.board[0][5], fileBoard.inBounds(0, 5))
-    print(fileBoard.board[1][5], fileBoard.inBounds(1, 5))
-    print(fileBoard.board[2][5], fileBoard.inBounds(2, 5))
     while fileBoard.step():
         fileBoard.display()
+    fileBoard.display()
 
 
 if __name__ == '__main__':
