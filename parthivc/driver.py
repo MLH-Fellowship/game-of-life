@@ -57,7 +57,7 @@ class Board:
             newX, newY = x + xList[index], y + yList[index]
             if self.inBounds(newX, newY) and self.board[newX][newY]:
                 count += 1
-        if count > 1:
+        if count > 0:
             print(x, y, count)
         return count
 
@@ -80,10 +80,11 @@ class Board:
 
 
 def main():
-    # game = Board(8, 8)
-    # game.display()
-    fileBoard = Board(0, 0, "board.txt")
+    fileBoard = Board(0, 0, "board2.txt")
     fileBoard.display()
+    print(fileBoard.board[0][5], fileBoard.inBounds(0, 5))
+    print(fileBoard.board[1][5], fileBoard.inBounds(1, 5))
+    print(fileBoard.board[2][5], fileBoard.inBounds(2, 5))
     while fileBoard.step():
         fileBoard.display()
 
