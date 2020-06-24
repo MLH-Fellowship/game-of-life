@@ -24,3 +24,7 @@ defines an 8x8 board with three live cells and sixty-one dead ones.
 ## Round 2: Rules
 
 - Define a main loop and a `step` function. `step` should update a board using the rules of the game of Life.
+
+## Round 3: Cleanup
+
+- Make it pretty any way you want :)
