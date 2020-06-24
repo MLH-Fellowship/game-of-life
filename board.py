@@ -19,24 +19,24 @@ class Board:
 
     #define main loop, step function 
 
-    def see_neighbours(self):
-        neighbours = []
+    def see_neighbors(self):
+        neighbors = []
         for row in range(len(self.board)):
             for column in range(len(self.board[0])):
-                is_neighbour = True
+                is_neighbor = True
                 #check each diretions 
-        return neighbours
+        return neighbors
     def update_board(self):
             for row in range(len(self.board)):
                 for column in range(len(self.board[row])):
-                #check the neighbours each time 
-                get_neighbour = self.see_neighbours
+                #check the neighbors each time 
+                get_neighbor = self.see_neighbors
                 #collect living cells 
                 cells_alive = []
                 #look through array 
-                for neighbour in get_neighbour:
-                    if neighbour.lives() 
-                        cells_alive.append(neighbour)
+                for neighbor in get_neighbor:
+                    if neighbor.lives() 
+                        cells_alive.append(neighbor)
 
 
 
