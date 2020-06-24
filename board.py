@@ -40,3 +40,24 @@ class Board:
             rows.append(row)
         for row in rows:
             print(''.join(row))
+
+    def _live_neighbors(self, i, j):
+        return sum(
+            (_i, _j) in self._cells
+            for _i in range(i - 1, i + 2)
+            for _j in range(j - 1, j + 2))
+
+    def _should_live(self, i, j):
+        if (i, j) in self._cells:
+            return self._live_neighbors(i, j) in {2, 3}
+        else:
+            return self._live_neighbors(i, j) == 3
+
+    def update(self):
+        live_cells = set()
+        for i, j in self._cells:
+            for _i in range(i - 1, i + 2):
+                for _j in range(j - 1, j + 2):
+                    if self._should_live(_i, _j):
+                        live_cells.add((_i, _j))
+        self._cells = live_cells
