@@ -1,6 +1,6 @@
 
 class Board (object):
-    
+
         def __init__(self, file):
             self.board = []
             for i in f:
